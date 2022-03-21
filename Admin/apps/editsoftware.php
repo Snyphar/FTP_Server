@@ -1,4 +1,4 @@
-<?php include 'helpers/editMoviesForm.php'?>
+<?php include 'helpers/editSoftwareForm.php'?>
 <!DOCTYPE html>
 <html lang="en">
   
@@ -118,44 +118,21 @@
                         ';
                     }
                 ?>
-                
-            <div class="form-layout form-layout-1">
-                <h6 class="tx-gray-800 tx-uppercase tx-bold tx-14 mg-b-10">IMDb Link</h6>
-                <p class="mg-b-25 mg-lg-b-50">Enter ImDb link to pull information easily</p>
-                <form enctype="multipart/form-data" method="GET" action="<?php echo $_SERVER['PHP_SELF'];?>">
-                    
-                    <div class="row mg-t-20">
-                        <div class="col-lg-12">
-                            <textarea rows="3" name="imdbLink" class="form-control" placeholder=""></textarea>
-                        </div><!-- col -->
-                        
-                    </div><!-- row -->
-                    <br>
-                    <div class="form-layout-footer">
-                        <button class="btn btn-info">Pull Info</button>
-                        
-                    </div><!-- form-layout-footer -->
-                </form>
-
-            </div>
-            <div class="form-layout form-layout-1">
-                <h6 class="tx-gray-800 tx-uppercase tx-bold tx-14 mg-b-10">EDIT MOVIE</h6>
-                <p class="mg-b-25 mg-lg-b-50">Info of Movie</p>
+                <div class="form-layout form-layout-1">
+                <h6 class="tx-gray-800 tx-uppercase tx-bold tx-14 mg-b-10">EDIT Software</h6>
+                <p class="mg-b-25 mg-lg-b-50">Info of Software</p>
                 <form method="post" action="<?php echo $_SERVER['PHP_SELF'];?>" enctype="multipart/form-data" data-parsley-validate>
                     <div class="wd-300">
                         <div class="d-flex mg-b-30">
                             <div class="form-group mg-b-0">
                                 <label>Title <span class="tx-danger">*</span></label>
-                                <input type="text" name="movTitle" class="form-control wd-250" value="<?php echo $title;?>" required >
+                                <input type="text" name="softTitle" class="form-control wd-250" value="<?php echo $title;?>" required >
 
                             </div><!-- form-group -->
-                            <div class="form-group mg-b-0 mg-l-20">
-                                <label>Rating <span class="tx-danger">*</span></label>
-                                <input type="text" name="movRating" class="form-control wd-250" value="<?php echo $rating;?>"  required>
-                            </div><!-- form-group -->
+                            
                             <div class="form-group mg-b-0 mg-l-20">
                                 <label>File Path <span class="tx-danger">*</span></label>
-                                <input type="text" name="movFileName" class="form-control wd-250" value="<?php echo $file;?>"  required>
+                                <input type="text" name="softFileName" class="form-control wd-250" value="<?php echo $file;?>"  required>
                             </div><!-- form-group -->
                         </div><!-- d-flex -->   
                         <div class="d-flex mg-b-30">
@@ -166,25 +143,8 @@
                     <div class="row mg-t-20">
                         
                         <div class="col-lg-12">
-                            <p class="mg-b-25 mg-lg-b-50">Cast</p>
-                            <textarea rows="3" name="movCast"  class="form-control"  required><?php echo $cast;?></textarea>
-
-                        </div><!-- col -->
-                        
-                    </div><!-- row -->
-                    <div class="row mg-t-20">
-                        
-                        <div class="col-lg-12">
-                            <p class="mg-b-25 mg-lg-b-50">Genre</p>
-                            <textarea rows="3" name="movGenre" class="form-control"  required><?php echo $genre;?></textarea>
-                        </div><!-- col -->
-                        
-                    </div><!-- row -->
-                    <div class="row mg-t-20">
-                        
-                        <div class="col-lg-12">
-                            <p class="mg-b-25 mg-lg-b-50">Plot</p>
-                            <textarea rows="5" name="movPlot" class="form-control" required><?php echo $plot;?></textarea>
+                            <p class="mg-b-25 mg-lg-b-50">Description</p>
+                            <textarea rows="5" name="softDescription" class="form-control" required><?php echo $description;?></textarea>
                         </div><!-- col -->
                         
                     </div><!-- row --><br>
@@ -193,14 +153,14 @@
                             
                             <div class='col-lg-4'>
                             <p class="mg-b-25 mg-lg-b-50">Catagories</p>
-                                <select class="form-control select2" name="movCatagories" data-placeholder="Choose Catagories">
+                                <select class="form-control select2" name="softCatagories" data-placeholder="Choose Catagories">
                                     <?php
                                         $conn = dbConnect($servername,$username,$password,$dbname);
-                                        $catagories = getCatagories($conn);
+                                        $catagories = getSoftwareCatagories($conn);
                                         if ($catagories->num_rows > 0) {
                                             // output data of each row
                                             while($row = $catagories->fetch_assoc()) {
-                                            echo '<option value="'.$row["catagories"].'" ';echo selectCatagory($catagory,$row["catagories"]);echo'>'.$row["catagories"].'</option>';
+                                            echo '<option value="'.$row["catagory"].'">'.$row["catagory"].'</option>';
                                             }
                                         }
 
@@ -211,7 +171,8 @@
                             
                             <div class='col-lg-4'>
                             <p class="mg-b-25 mg-lg-b-50">Poster File</p>
-                                <input type="file" name="movPoster" id="movPoster"  onchange="previewFile(this);">
+                                <input type="hidden" name="softID" id="softID"  value= "<?php echo $stid; ?>">
+                                <input type="file" name="softPoster" id="movPoster"  onchange="previewFile(this);">
                             </div>
 
                             
@@ -222,9 +183,7 @@
                         {
                             echo '
                             <div class="card bd-0">
-                                <input type="hidden" name="movPosterIMDb"    value="'.$poster.'">
-                                <input type="hidden" name="vid"    value="'.$vid.'">
-                                <input type="hidden" name="mid"    value="'.$mid.'">
+                                <input type="hidden" name="softPosterPrev"    value="'.$poster.'">
                                 <img class="card-img img-fluid" id="previewImg" src="'.$poster.'" alt="Image">
                                 <div class="card-img-overlay pd-30 d-flex align-items-start flex-column">
                                     
@@ -246,7 +205,7 @@
                     ?>
                     
                     <div class="form-layout-footer">
-                        <button type="submit" class="btn btn-info">SAVE MOVIE</button>
+                        <button type="submit" class="btn btn-info">SAVE</button>
                         
                     </div><!-- form-layout-footer -->
 
@@ -255,6 +214,10 @@
                 
                 
             </div>
+
+                
+                </div>
+                
             
 
             

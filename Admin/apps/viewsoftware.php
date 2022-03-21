@@ -107,7 +107,7 @@
                                         
                                         <td>
                                         <div class="btn-group" role="group" aria-label="Basic example">
-                                            <a href="editmovies.php?id='.$row["stid"].'">
+                                            <a href="editsoftware.php?id='.$row["stid"].'">
                                                 <button type="button" class="btn btn-warning pd-x-25">Edit</button>
                                             </a>
                                             
@@ -209,7 +209,7 @@
                },
                success: function(data) {
                     $("#"+id).remove();
-                    alert("Movie removed successfully");  
+                    alert("Software removed successfully");  
                }
             });
         }

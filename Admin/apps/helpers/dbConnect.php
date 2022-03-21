@@ -344,4 +344,37 @@ function getSoftware($conn)
     $result = $conn->query($sql);
     return $result;
 }
+function deleteSoftware($conn,$stid)
+{
+    $sql = 'DELETE FROM `software` WHERE stid = '.$stid;
+    if ($conn->query($sql) === TRUE) {
+        return 1;
+    }
+    else
+    {
+        return -1;
+    }
+}
+function getSoftwareInfo($conn,$stid)
+{
+    $sql = 'SELECT * FROM  software WHERE stid = '.$stid;
+    $result = $conn->query($sql);
+    return $result;
+}
+
+function editSoftware($conn,$stid,$title,$poster,$description,$file,$catagories)
+{
+    $sql = 'UPDATE `software` SET `title`="'.$title.'",`description`="'.$description.'",
+            `filepath`="'.$file.'",`poster`="'.$poster.'",`catagory`="'.$catagories.'" WHERE stid = '.$stid;
+        echo $sql;
+        
+    if ($conn->query($sql) === TRUE) {
+        
+        return 1; 
+    } else {
+        return -1;
+        
+    }
+}
+
 ?>

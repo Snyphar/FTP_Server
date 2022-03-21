@@ -120,25 +120,6 @@
                 ?>
                 
             <div class="form-layout form-layout-1">
-                <h6 class="tx-gray-800 tx-uppercase tx-bold tx-14 mg-b-10">IMDb Link</h6>
-                <p class="mg-b-25 mg-lg-b-50">Enter ImDb link to pull information easily</p>
-                <form enctype="multipart/form-data" method="GET" action="<?php echo $_SERVER['PHP_SELF'];?>">
-                    
-                    <div class="row mg-t-20">
-                        <div class="col-lg-12">
-                            <textarea rows="3" name="imdbLink" class="form-control" placeholder=""></textarea>
-                        </div><!-- col -->
-                        
-                    </div><!-- row -->
-                    <br>
-                    <div class="form-layout-footer">
-                        <button class="btn btn-info">Pull Info</button>
-                        
-                    </div><!-- form-layout-footer -->
-                </form>
-
-            </div>
-            <div class="form-layout form-layout-1">
                 <h6 class="tx-gray-800 tx-uppercase tx-bold tx-14 mg-b-10">EDIT MOVIE</h6>
                 <p class="mg-b-25 mg-lg-b-50">Info of Movie</p>
                 <form method="post" action="<?php echo $_SERVER['PHP_SELF'];?>" enctype="multipart/form-data" data-parsley-validate>
