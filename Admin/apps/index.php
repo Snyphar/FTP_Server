@@ -1,3 +1,6 @@
+<?php
+  include 'helpers/dbConnect.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
   
@@ -60,7 +63,9 @@
         <h4 class="tx-gray-800 mg-b-5">Dashboard</h4>
         <p class="mg-b-0">All Information in one place</p>
       </div><!-- d-flex -->
-
+  <?php
+    $conn = dbConnect($servername,$username,$password,$dbname);
+  ?>
       <div class="br-pagebody mg-t-5 pd-x-30">
         <div class="row row-sm">
           <div class="col-sm-6 col-xl-3">

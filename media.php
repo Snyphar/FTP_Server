@@ -227,8 +227,8 @@
                               <div class="d-flex justify-content-between">
                                 <div class="text1"><h2><?php echo $videoInfo["title"];?></h2></div>
                                 <div class="icon d-flex">
-                                    <a href=""> <i class="fas fa-share-alt"></i> Share</a>
-                                    <a href="" class="num"> Download</a>
+                                    
+                                    <a href="<?php echo $video?>" target="_blank" class="num"> Download</a>
                                 
                                 </div>
                               </div>

@@ -88,6 +88,21 @@ function getSeriesInfo($conn,$sid)
 function getSeriesVideo($conn,$sid)
 {
 
+    $sql = 'SELECT * FROM  series_season WHERE sid = '.$sid.' ORDER BY season';
+    $result = $conn->query($sql);
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        $sql = 'SELECT * from series_season_episode WHERE ssid = '.$row["ssid"].' ORDER BY season , episode';
+        echo $sql;
+        $result = $conn->query($sql);
+        if($result->num_rows > 0)
+        {
+            $row = $result->fetch_assoc();
+            $vid = $row["vid"];
+
+            return getVideoLink($conn,$vid);
+    }
+    }
     $sql = 'SELECT * from series_season_episode WHERE sid = '.$sid.' ORDER BY season , episode';
     echo $sql;
     $result = $conn->query($sql);
@@ -106,9 +121,9 @@ function getSeason($conn,$sid)
     $result = $conn->query($sql);
     return $result;
 }
-function getEpisodes($conn,$sid,$season)
+function getEpisodes($conn,$ssid,$season)
 {
-    $sql = 'SELECT * FROM  series_season_episode WHERE sid = '.(int)$sid.' AND season = '.(int)$season;
+    $sql = 'SELECT * FROM  series_season_episode WHERE ssid = '.(int)$ssid.' AND season = '.(int)$season;
     $result = $conn->query($sql);
     return $result;
 
@@ -132,5 +147,21 @@ function addViews($conn,$vid)
         }
 
 }
+function getSoftware($conn)
+{
+    $sql = 'SELECT * FROM  software';
+    $result = $conn->query($sql);
+    return $result;
+}
+function getSoftwareFilepath($conn,$stid)
+{
+    $sql = 'SELECT `filepath` FROM `software` WHERE stid = '.$stid;
+    $result = $conn->query($sql);
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        return $row["filepath"];
 
+    }
+    
+}
 ?>

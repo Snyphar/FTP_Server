@@ -1,3 +1,6 @@
+<?php
+  include 'db/dbHandle.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -114,6 +117,207 @@
       </div>
     </div>
   </div>
+
+  <section id="dedicated-server">
+    <div class="container">
+        <div class="row details">
+            <div class="col-lg-3">
+                <div class="box">
+                  <select class="form-select form-select-lg " aria-label=".form-select-lg example">
+                    <option selected>Software</option>
+                    <option value="1">Game</option>
+                    <option value="2">Other</option>
+
+                  </select>
+
+                </div>
+            </div>
+            <div class="col-lg-2 ">
+                <div class="box d-lg-block d-sm-none ">
+                    <h2>Name</h2>
+
+                </div>
+            </div>
+            <div class="col-lg-2 ">
+                <div class="box d-lg-block d-sm-none ">
+                    <h2>Description</h2>
+
+                </div>
+            </div>
+            
+            <div class="col-lg-2">
+                <div class="box">
+                    <h2 class="ms-1">
+                      Size
+                        </h2>
+
+                </div>
+            </div>
+
+            <div class="col-lg-3">
+                <div class="box">
+                  <form class="d-flex from">
+                    <input class="form-control me-2" type="text" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-danger" type="submit">Search</button>
+                  </form>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</section>
+<div class="dedicated-plans-block">
+    <div class="container">
+        <div class="dedicated-plans-main">
+            <div class="dedicated-plans-main-box">
+                <!-- <div class="head">
+                    <h3>Single Processor</h3>
+                    <p>Sort a list of servers by clicking on the column header</p>
+                </div> -->
+                <?php
+                  $conn = dbConnect($servername,$username,$password,$dbname);
+                  $software = getSoftware($conn);
+                  if ($software->num_rows > 0) {
+                    while($row = $software->fetch_assoc()) {
+                      echo'
+                        <div class="dedicated-plans-main-box-outer">
+                        <div class="dedicated-plans-box">
+                            <div class="row">
+                                <div class="col-lg-3">
+                                <div class="box">
+                                  <img src="Admin/apps/'.$row["poster"].'" class="soft-thumbnail" height="80" width="60" />
+                                  
+                                </div>
+
+                            </div>
+                                <div class="col-lg-2">
+                                    <div class="box">
+                                      
+                                      <h2> '.$row["title"].'</h2>
+                                    </div>
+
+                                </div>
+                                <div class="col-lg-2">
+                                    <div class="box">
+
+                                        <p>
+                                            
+                                            '.$row["description"].'
+                                        </p>
+                                    </div>
+
+                                </div>
+                                
+                                <div class="col-lg-2">
+                                    <div class="box">
+
+                                        <p>
+                                            
+                                            '.$row["size"].'
+                                        </p>
+                                    </div>
+
+                                </div>
+
+                                <div class="col-lg-3">
+                                    <div class="box">
+                                      <div class="mt-2 d-flex  align-items-center">
+                                        <a href="'.$row["filepath"].'" target="_blank" class="btn btn-danger">Download</a>
+                                    </div>
+
+                                    </div>
+
+                                </div>
+
+
+                            </div>
+                        </div><!--dedicated-plans-box-->
+
+
+
+
+
+                    </div>
+                      ';
+                    }
+                    
+                  }
+                  
+                ?>
+                
+
+
+
+
+
+                </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            </div><!--dedicated-plans-main-box-->
+
+            <div class="dedicated-plans-main-box">
+
+                <div class="dedicated-plans-main-box-outer">
+
+
+                </div>
+            </div><!--dedicated-plans-main-box-->
+        </div>
+    </div>
+</div>
 
 
 

@@ -312,11 +312,11 @@ function insertNewGenre($conn,$genre)
 
   }
 
-function insertSoftware($conn,$title,$poster,$description,$file,$catagories)
+function insertSoftware($conn,$title,$poster,$description,$file,$catagories,$size)
 {
     
-    $sql = 'INSERT INTO software(title, description, filepath, poster, catagory) 
-        VALUES ("'.$title.'","'.$description.'","'.$file.'","'.$poster.'","'.$catagories.'")';
+    $sql = 'INSERT INTO software(title, description, filepath, poster, catagory, size) 
+        VALUES ("'.$title.'","'.$description.'","'.$file.'","'.$poster.'","'.$catagories.'","'.$size.'")';
     echo $sql;
         
     if ($conn->query($sql) === TRUE) {

@@ -136,6 +136,11 @@
                                 <label>File Path <span class="tx-danger">*</span></label>
                                 <input type="text" name="softFileName" class="form-control wd-250" value="<?php echo $file;?>"  required>
                             </div><!-- form-group -->
+                            <div class="form-group mg-b-0 mg-l-20">
+                                <label>Size <span class="tx-danger">*</span></label>
+                                <input type="text" name="softSize" class="form-control wd-250"  required >
+
+                            </div><!-- form-group -->
                         </div><!-- d-flex -->   
                         <div class="d-flex mg-b-30">
                             

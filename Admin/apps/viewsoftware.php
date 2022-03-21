@@ -86,7 +86,7 @@
                             <th class="wd-15p">Poster</th>
                             <th class="wd-15p">Title</th>
                             <th class="wd-15p">Description</th>
-                            
+                            <th class="wd-15p">Size</th>
                             <th class="wd-10p">Action</th>
                             
                             </tr>
@@ -103,7 +103,7 @@
                                         <td><img src="'.$row["poster"].'" alt="" border=3 height=150 width=100></img></td>
                                         <td>'.$row["title"].'</td>
                                         <td>'.$row["description"].'</td>
-                                        
+                                        <td>'.$row["size"].'</td>
                                         
                                         <td>
                                         <div class="btn-group" role="group" aria-label="Basic example">

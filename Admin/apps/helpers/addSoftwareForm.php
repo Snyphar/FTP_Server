@@ -5,7 +5,7 @@
     $title = "";
     $url = "";
     $poster = "";
-    
+    $size = "";
     $description = ""; 
     $file = "";
     $catagories = "";
@@ -20,6 +20,7 @@
         $title = $_POST['softTitle'];
         $description = $_POST['softDescription'];
         $file = $_POST['softFileName'];
+        $size = $_POST['softSize'];
         $catagories = $_POST['softCatagories'];
         
         if(file_exists($_FILES['softPoster']['tmp_name']) && is_uploaded_file($_FILES['softPoster']['tmp_name'])) 
@@ -68,7 +69,7 @@
         }
         
         $conn = dbConnect($servername,$username,$password,$dbname);
-        $res = insertSoftware($conn,$title,$poster,$description,$file,$catagories);
+        $res = insertSoftware($conn,$title,$poster,$description,$file,$catagories,$size);
         
         if($res !== -1)
         {

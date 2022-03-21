@@ -1,6 +1,10 @@
 /*==========
 variable css start
 ==============*/
+
+
+
+
 :root {
   --ff1: 'Open Sans', sans-serif;
   --ff2: 'Raleway', sans-serif;
@@ -10,7 +14,7 @@ variable css start
 variable css end
 ==============*/
 /*==========================
-responsive NAV bar 
+responsive NAV bar
 ==================
 ========================*/
 ul {
@@ -189,7 +193,7 @@ menu css start
   transition: 0.4s;
 }
 .header .nav .menu .nav-item ul li a:hover::after {
-  width: 60%;
+  width: 0%;
 }
 .header .nav .menu .login-contact {
   line-height: 60px;
@@ -1628,6 +1632,21 @@ responsive
   }
 }
 @media (max-width: 575px) {
+  #dedicated-server .container .details .box h2 {
+    font-size: 18px;
+    font-family: var(--ff1);
+    color: white;
+    font-weight: 500;
+    line-height: 2;
+    padding-top: 5px;
+    display: none;
+  }
+
+  #dedicated-server .form-select {
+    display: block;
+    width: 41% !important;
+  }
+
   #banner {
     margin-top: 50px;
   }
@@ -2041,6 +2060,124 @@ responsive
 /*==================
 responsive
 ===================*/
+#dedicated-server {
+  margin-top: 100px;
+}
+#dedicated-server .form-select {
+  display: block;
+  width: 60%;
+  padding: 0.375rem 2.25rem 0.375rem 0.75rem;
+  -moz-padding-start: calc(0.75rem - 3px);
+  font-size: 1.3rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #fff;
+  background-color: #2D2D2D;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  background-size: 16px 12px;
+  border: 1px solid #2D2D2D;
+  border-radius: 0.25rem;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+#dedicated-server .container .details {
+  margin-bottom: 20px;
+  background-color: rgba(58, 58, 58, 0.712);
+  border-radius: 8px;
+}
+
+#dedicated-server .container .details .box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+#dedicated-server .container .details .box h2 {
+  font-size: 18px;
+  font-family: var(--ff1);
+  color: white;
+  font-weight: 500;
+  line-height: 2;
+  padding-top: 5px;
+}
+
+.dedicated-plans-block .dedicated-plans-main .dedicated-plans-box {
+  margin-bottom: 15px;
+  padding: 7px 7px;
+  border-radius: 9px;
+  background-color: rgba(131, 131, 131, 0.104);
+  transition: 0.4s;
+  cursor: pointer;
+  margin-bottom: 20px !important;
+}
+
+.dedicated-plans-block .dedicated-plans-main .dedicated-plans-box:hover {
+  box-shadow: rgba(206, 206, 206, 0.24) 0px 3px 8px;
+}
+
+.dedicated-plans-block .dedicated-plans-main .dedicated-plans-box .box {
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.dedicated-plans-block .dedicated-plans-main .dedicated-plans-box .box span {
+  width: 40px;
+}
+
+.dedicated-plans-block .dedicated-plans-main .dedicated-plans-box .box span img {
+  width: 28px;
+}
+
+.dedicated-plans-block .dedicated-plans-main .dedicated-plans-box .box h2 {
+  font-size: 13px;
+  font-family: var(--ff1);
+  color: rgba(232, 232, 232, 0.863);
+  font-weight: 700;
+  margin-top: 10px;
+}
+
+.dedicated-plans-block .dedicated-plans-main .dedicated-plans-box .box p {
+  margin-bottom: 0px;
+  color: #e9e9e9;
+  font-size: 14px;
+  line-height: 18px;
+  font-weight: 600;
+  font-family: var(--ff1);
+  width: 200px;
+}
+
+.dedicated-plans-block .dedicated-plans-main .dedicated-plans-box .box p span {
+  color: #727d88;
+  font-size: 13px;
+}
+
+#dedicated-server .container .details .box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+#dedicated-server .container .details .box .from .form-control {
+  color: #000 !important;
+}
+#dedicated-server .container .details .box .from .btn {
+  margin-top: 5px;
+  width: 80px;
+}
+
+.dedicated-plans-block .dedicated-plans-main .dedicated-plans-box .box .from .form-control .btn {
+  width: 70px;
+}
+
 .scroller {
   width: 400px;
   height: 500px;
@@ -2089,5 +2226,40 @@ responsive
   text-align: left;
   background-color: #E82F2F !important;
 }
+
+
+
+
+.dropdown-menu {
+	position: absolute;
+	z-index: 1000;
+	display: none;
+	min-width: 10rem;
+	padding: 0.5rem 0;
+	margin: 0;
+	font-size: 1rem;
+	color: #212529;
+	text-align: left;
+	list-style: none;
+	background-color: #000;
+	background-clip: padding-box;
+	border: 1px solid rgba(0, 0, 0, 0.15);
+	border-radius: 0.25rem;
+}
+.header .nav .menu .nav-item ul li  {
+display: flex;
+align-items: center;
+}
+
+.soft-thumbnail:hover {
+  position:relative;
+  
+  width:200px;
+  height:250px;
+  display:block;
+  z-index:999;
+}
+
+
 
 /*# sourceMappingURL=styles.css.map */

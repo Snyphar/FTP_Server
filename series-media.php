@@ -4,6 +4,7 @@
   if($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['series'])) {
       // collect value of input field
       $sid = $_GET['series'];
+
       if (empty($sid)) {
         echo "Link is empty";
       } 
@@ -321,7 +322,7 @@
                                     <div class="episodes">';
 
 
-                                    $episodes = getEpisodes($conn,$sid,$row["season"]);
+                                    $episodes = getEpisodes($conn,$row["ssid"],$row["season"]);
                                     if ($episodes->num_rows > 0) {
                                         // output data of each row
                                         while($row1 = $episodes->fetch_assoc()) {
