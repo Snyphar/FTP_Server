@@ -170,9 +170,9 @@ function insertSeries($conn,$rating,$title,$IMDburl,$poster,$plot,$genre,$cast,$
 
 
 }
-function checkDuplicateEpisodes($conn,$season,$episode,$series)
+function checkDuplicateEpisodes($conn,$season,$episode,$ssid)
 {
-    $sql = 'SELECT * FROM series_season_episode WHERE sid ='.$series.' AND season = '.$season.' AND episode = '.$episode;
+    $sql = 'SELECT * FROM series_season_episode WHERE ssid ='.$ssid.' AND season = '.$season.' AND episode = '.$episode;
     $result = $conn->query($sql);
     if ($result->num_rows > 0) {
         return TRUE;
@@ -180,32 +180,23 @@ function checkDuplicateEpisodes($conn,$season,$episode,$series)
     return FALSE;
 
 }
-function insertEpisode($conn,$series,$season,$episode,$file)
+function insertEpisode($conn,$ssid,$season,$episode,$file)
 {
     
-    $sql = 'SELECT * FROM series_season WHERE sid ='.$series.' AND season = '.$season;
+    $sql = 'SELECT * FROM series_season WHERE ssid ='.$ssid.' AND season = '.$season;
     $result = $conn->query($sql);
     if ($result->num_rows > 0) {
         
     }
-    else{
-        $sql = 'INSERT INTO series_season(sid, season) VALUES ('.$series.','.$season.')';
-        if ($conn->query($sql) === TRUE) {  
-        } 
-        else {
-            return FALSE;
-            $error =  "Error: " . $sql . "<br>" . $conn->error;
-        }
-
-    }
+    
     $sql = 'INSERT INTO videos(filepath) VALUES ("'.$file.'")';
     $vid = -1;
     $error = $sql;
     if ($conn->query($sql) === TRUE) {
         $vid = $conn->insert_id;
         $error = "VID: ".$vid;
-        $sql = 'INSERT INTO `series_season_episode`(`sid`, `season`, `episode`, `vid`)
-                 VALUES ('.$series.','.$season.','.$episode.','.$vid.')';
+        $sql = 'INSERT INTO `series_season_episode`(`ssid`, `season`, `episode`, `vid`)
+                 VALUES ('.$ssid.','.$season.','.$episode.','.$vid.')';
         echo $sql;
         if ($conn->query($sql) === TRUE) {
             return TRUE; 
@@ -265,9 +256,9 @@ function getSeason($conn,$sid)
     $result = $conn->query($sql);
     return $result;
 }
-function getEpisodes($conn,$sid,$season)
+function getEpisodes($conn,$ssid,$season)
 {
-    $sql = 'SELECT * FROM  series_season_episode WHERE sid = '.(int)$sid.' AND season = '.(int)$season;
+    $sql = 'SELECT * FROM  series_season_episode WHERE ssid = '.(int)$ssid.' AND season = '.(int)$season;
     $result = $conn->query($sql);
     return $result;
 
@@ -376,5 +367,72 @@ function editSoftware($conn,$stid,$title,$poster,$description,$file,$catagories)
         
     }
 }
+function getSeasonInfo($conn,$ssid)
+{
+    $sql = 'SELECT * FROM series_season WHERE ssid = '.$ssid;
+    $result = $conn->query($sql);
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        return $row;
+    }
+    
+}
+function editSeason($conn,$ssid,$season)
+{
+    $sql = 'UPDATE `series_season` SET `season`= '.$season.' WHERE ssid = '.$ssid;
+    if ($conn->query($sql) === TRUE) {
+        $sql = 'UPDATE `series_season_episode` SET `season`= '.$season.' WHERE ssid = '.$ssid;
+        if ($conn->query($sql) === TRUE) {
+            return 1;
+        
+        } else {
+            return -1;
+            
+        }
+        
+    } else {
+        return -1;
+        
+    }
+    $sql = 'UPDATE `series_season_episode` SET `season`='.$season.' WHERE ssid = '.$ssid;
+    if ($conn->query($sql) === TRUE) {
+        
+        
+    } else {
+        return -1;
+        
+    }
 
+}
+function deleteSeries($conn,$sid)
+{
+    $sql = 'DELETE FROM `series` WHERE sid = '.$sid;
+    if ($conn->query($sql) === TRUE) {
+        $sql = 'DELETE FROM `series_season` WHERE sid = '.$sid;
+        $conn->query($sql);
+        $sql = 'DELETE FROM `series_season_episode` WHERE sid = '.$sid;
+        $conn->query($sql);
+
+    }
+    else
+    {
+        return -1;
+    }
+
+}
+function deleteSeason($conn,$ssid)
+{
+    $sql = 'DELETE FROM `series_season` WHERE ssid = '.$ssid;
+    if ($conn->query($sql) === TRUE) {
+        $sql = 'DELETE FROM `series_season_episode` WHERE ssid = '.$ssid;
+        $conn->query($sql);
+        return 1;
+    }
+    else
+    {
+        return -1;
+    }
+
+    
+}
 ?>

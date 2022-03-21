@@ -151,7 +151,7 @@
                             while($row = $season->fetch_assoc()) {
                                 $i++;
                                 echo'
-                                <div class="card">
+                                <div id="acc'.$row["ssid"].'" class="card">
                                     <div class="card-header" role="tab" id="headingOne">
                                     <h6 class="mg-b-0">
                                         <a data-toggle="collapse" data-parent="#accordion" href="#collapse'.$i.'"
@@ -162,7 +162,16 @@
                                     </div><!-- card-header -->
             
                                     <div id="collapse'.$i.'" class="collapse show" role="tabpanel" >
-                                    <div class="card-block pd-20">';
+                                    <div class="card-block pd-20">
+                                    <div id="'.$row["ssid"].'" class="btn-group" role="group" aria-label="Basic example">
+                                            <a href="editseason.php?ssid='.$row["ssid"].'">
+                                                <button type="button" class="btn btn-primary pd-x-25">EDIT SEASON</button>
+                                            </a>
+                                                <button type="button" class="btn btn-danger pd-x-25 remove-season">Delete</button>
+                                            
+                                    </div>
+                                    ';
+                                    
                                         echo '
                                         <div class="table-wrapper">
                                             <table id="datatable1" class="table display responsive nowrap">
@@ -173,7 +182,7 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>';
-                                    $episodes = getEpisodes($conn,$seriesID,$row["season"]);
+                                    $episodes = getEpisodes($conn,$row["ssid"],$row["season"]);
                                     if ($episodes->num_rows > 0) {
                                         // output data of each row
                                         while($row1 = $episodes->fetch_assoc()) {
@@ -202,7 +211,7 @@
                                             </tbody>
                                         </table>
                                         <div>
-                                            <a href="addepisode.php?sid='.$seriesID.'&season='.$row["season"].'">
+                                            <a href="addepisode.php?sid='.$seriesID.'&ssid='.$row["ssid"].'">
                                                 <button type="button" class="btn btn-primary pd-x-25">ADD EPISODES</button>
                                             </a>    
                                         
@@ -307,7 +316,28 @@
                }
             });
         }
-    });
+        });
+        $(".remove-season").click(function(){
+        var id = $(this).parents("div").attr("id");
+        
+
+        if(confirm('Are you sure to remove this Season?'))
+        {
+            $.ajax({
+               url: 'helpers/deleteseason.php',
+               type: 'GET',
+               data: {id: id},
+               error: function() {
+                  alert('Something is wrong');
+               },
+               success: function(data) {
+                    $("#"+id).remove();
+                    alert("Episode removed successfully");  
+                    location.reload();
+               }
+            });
+        }
+        });
     </script>
 
 </body>

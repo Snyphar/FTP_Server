@@ -5,37 +5,29 @@
 
     $success = 0;
     $error = "";
-    $season = -1;
     $ssid = -1;
     $sid = -1;
-    $seid = -1;
+    $season = -1;
 
     if($_SERVER["REQUEST_METHOD"] == "GET")
     {
         $ssid = $_GET['ssid'];
-        $sid = $_GET['sid'];
+
         $conn = dbConnect($servername,$username,$password,$dbname);
-        $seasonInfo = getSeasonInfo($conn,$ssid);
+        $seasonInfo  = getSeasonInfo($conn,$ssid);
+        $sid = $seasonInfo["sid"];
         $season = $seasonInfo["season"];
-
-
     }
     if($_SERVER["REQUEST_METHOD"] == "POST") {
-        $season = (int)$_POST['seriesSeason'];
+        
+        $sid = (int)$_POST['sid'];
+        $season = $_POST['season'];
         $ssid = (int)$_POST['ssid'];
-        $episode = (int)$_POST['seriesEpisode'];
-        $sid = (int)$_POST['seriesId'];
-        $file = $_POST['seriesFileName'];
         
 
         $conn = dbConnect($servername,$username,$password,$dbname);
-        $duplicate = checkDuplicateEpisodes($conn,$season,$episode,$ssid);
-        if($duplicate)
-        {
-            $success = -2;
-        }
-        else{
-            $res = insertEpisode($conn,$ssid,$season,$episode,$file);
+        
+            $res = editSeason($conn,$ssid,$season);
             if($res)
             {
                 $success = 1;
@@ -43,7 +35,7 @@
             else{
                 $success = -1; 
             }
-        }
+        
         
         dbClose($conn);
         

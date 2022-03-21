@@ -1,4 +1,4 @@
-<?php include 'helpers/addEpisodeForm.php'?>
+<?php include 'helpers/editSeasonForm.php'?>
 <!DOCTYPE html>
 <html lang="en">
   
@@ -65,7 +65,7 @@
         
         
         <div class="pd-x-20 pd-sm-x-30 pd-t-20 pd-sm-t-30">
-            <h4 class="tx-gray-800 mg-b-5">ADD A NEW EPISODE</h4>
+            <h4 class="tx-gray-800 mg-b-5">EDIT SEASON</h4>
             <p class="mg-b-0">To add a new episode to the series, Please
                 Select Which Series You want to add and the Season.</p>
                 <p class="mg-b-0"></p>
@@ -90,7 +90,7 @@
                                 </button>
                                 <div class="d-flex align-items-center justify-content-start">
                                 <i class="icon ion-ios-checkmark alert-icon tx-32 mg-t-5 mg-xs-t-0"></i>
-                                <span><strong>Sucess!</strong> Episode Added!</span>
+                                <span><strong>Sucess!</strong> Episode Edited!</span>
                                 </div><!-- d-flex -->
                             </div><!-- alert -->
                             </div><!-- col-xl-6 -->
@@ -175,21 +175,17 @@
                     </table>
                 </div>
             <div class="form-layout form-layout-1">
-                <h6 class="tx-gray-800 tx-uppercase tx-bold tx-14 mg-b-10">Add New Episode</h6>
+                <h6 class="tx-gray-800 tx-uppercase tx-bold tx-14 mg-b-10">EDIT Season</h6>
                 <p class="mg-b-25 mg-lg-b-50"></p>
                 <form method="post" action="<?php echo $_SERVER['PHP_SELF'];?>" data-parsley-validate>
                     <div class="wd-300">
                         <div class="d-flex mg-b-30">
+                            
                             <div class="form-group mg-b-0 mg-l-20">
-                                <label>Episode <span class="tx-danger">*</span></label>
-                                <input type="text" name="seriesEpisode" class="form-control wd-250"   required>
-                            </div><!-- form-group -->
-                            <div class="form-group mg-b-0 mg-l-20">
-                                <label>File Path <span class="tx-danger">*</span></label>
-                                <input type="text" name="seriesFileName" class="form-control wd-250"   required>
-                                <input type="hidden" name="seriesSeason" class="form-control wd-250" value="<?php echo $season;?>"  required >
+                                <label>Season <span class="tx-danger">*</span></label>
+                                <input type="text" name="season" class="form-control wd-250"   required value="<?php echo $season;?>">
                                 <input type="hidden" name="ssid" class="form-control wd-250" value="<?php echo $ssid;?>"  required >
-                                <input type="hidden" name="seriesId" class="form-control wd-250" value="<?php echo $sid;?>"  required >
+                                <input type="hidden" name="sid" class="form-control wd-250" value="<?php echo $sid;?>"  required >
                             </div><!-- form-group -->
                             
                         </div><!-- d-flex -->   
@@ -211,7 +207,7 @@
                             </select>
                         </div> d-flex -->
                         <div class="form-layout-footer">
-                            <button type="submit" class="btn btn-info">ADD EPISODE</button>
+                            <button type="submit" class="btn btn-info">EDIT EPISODE</button>
                             
                         </div><!-- form-layout-footer -->
                     </div>

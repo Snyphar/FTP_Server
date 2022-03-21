@@ -103,19 +103,19 @@
                                     // output data of each row
                                     while($row = $series->fetch_assoc()) {
                                       echo '
-                                      <tr>
+                                      <tr id="'.$row["sid"].'">
                                         <td><img src="'.$row["poster"].'" alt="" border=3 height=150 width=100></img></td>
                                         <td>'.$row["title"].'</td>
                                         <td>'.$row["rating"].'</td>
                                         <td>'.$row["cast"].'</td>
                                         
-                                        <td>
+                                        <td id="'.$row["title"].'">
                                         <div class="btn-group" role="group" aria-label="Basic example">
                                             <a href="viewepisodes.php?sid='.$row["sid"].'">
                                                 <button type="button" class="btn btn-warning pd-x-25">VIEW SERIES</button>
                                             </a>
                                             <a href="#">
-                                                <button type="button" class="btn btn-danger pd-x-25">Delete</button>
+                                                <button type="button" class="btn btn-danger pd-x-25 remove">Delete</button>
                                             </a>
                                         </div>
                                         </td>
@@ -156,6 +156,26 @@
     <script src="../js/ResizeSensor.js"></script>
     <script src="../js/dashboard.js"></script>
     <script>
+      $(".remove").click(function(){
+        var id = $(this).parents("tr").attr("id");
+        var title = $(this).parents("td").attr("id");
+
+        if(confirm('Are you sure to remove this Movie "'+title+'"?'))
+        {
+            $.ajax({
+               url: 'helpers/deleteseries.php',
+               type: 'GET',
+               data: {id: id},
+               error: function() {
+                  alert('Something is wrong');
+               },
+               success: function(data) {
+                    $("#"+id).remove();
+                    alert("Movie removed successfully");  
+               }
+            });
+        }
+    });
       $(function(){
         'use strict';
 
