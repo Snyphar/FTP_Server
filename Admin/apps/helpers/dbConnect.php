@@ -435,4 +435,47 @@ function deleteSeason($conn,$ssid)
 
     
 }
+function countMovies($conn)
+{
+    $sql = 'SELECT * FROM movies';
+    $result = $conn->query($sql);
+    if ($result->num_rows > 0) {
+        $count = mysqli_num_rows($result);
+        return $count;
+
+    }
+    else
+    {
+        return -1;
+    }
+}
+function countSeries($conn)
+{
+    $sql = 'SELECT * FROM series';
+    $result = $conn->query($sql);
+    if ($result->num_rows > 0) {
+        $count = mysqli_num_rows($result);
+        return $count;
+
+    }
+    else
+    {
+        return -1;
+    }
+}
+function countViews($conn)
+{
+    $sql = 'SELECT SUM(views_num) as sum FROM views';
+    $result = $conn->query($sql);
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        
+        return $row["sum"];
+
+    }
+    else
+    {
+        return -1;
+    }
+}
 ?>

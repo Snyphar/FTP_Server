@@ -65,6 +65,7 @@
       </div><!-- d-flex -->
   <?php
     $conn = dbConnect($servername,$username,$password,$dbname);
+    
   ?>
       <div class="br-pagebody mg-t-5 pd-x-30">
         <div class="row row-sm">
@@ -74,7 +75,7 @@
                 <i class="ion ion-earth tx-60 lh-0 tx-white op-7"></i>
                 <div class="mg-l-20">
                   <p class="tx-10 tx-spacing-1 tx-mont tx-medium tx-uppercase tx-white-8 mg-b-10">Total Movies</p>
-                  <p class="tx-24 tx-white tx-lato tx-bold mg-b-2 lh-1">200</p>
+                  <p class="tx-24 tx-white tx-lato tx-bold mg-b-2 lh-1"><?php echo countMovies($conn); ?></p>
                   <span class="tx-11 tx-roboto tx-white-6">all catagory</span>
                 </div>
               </div>
@@ -86,7 +87,7 @@
                 <i class="ion ion-bag tx-60 lh-0 tx-white op-7"></i>
                 <div class="mg-l-20">
                   <p class="tx-10 tx-spacing-1 tx-mont tx-medium tx-uppercase tx-white-8 mg-b-10">Total Series</p>
-                  <p class="tx-24 tx-white tx-lato tx-bold mg-b-2 lh-1">100</p>
+                  <p class="tx-24 tx-white tx-lato tx-bold mg-b-2 lh-1"><?php echo countSeries($conn); ?></p>
                   <span class="tx-11 tx-roboto tx-white-6">all catagory</span>
                 </div>
               </div>
@@ -110,7 +111,7 @@
                 <i class="ion ion-clock tx-60 lh-0 tx-white op-7"></i>
                 <div class="mg-l-20">
                   <p class="tx-10 tx-spacing-1 tx-mont tx-medium tx-uppercase tx-white-8 mg-b-10">Total View</p>
-                  <p class="tx-24 tx-white tx-lato tx-bold mg-b-2 lh-1">600</p>
+                  <p class="tx-24 tx-white tx-lato tx-bold mg-b-2 lh-1"><?php echo countViews($conn); ?></p>
                   <span class="tx-11 tx-roboto tx-white-6">65.45% on average time</span>
                 </div>
               </div>

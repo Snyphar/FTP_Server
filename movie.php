@@ -1,4 +1,5 @@
 <?php
+  include 'db/dbHandle.php';
   $catagory = "all";
   if($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['catagory']))
   {
@@ -35,7 +36,7 @@
 
     <?php
       include 'assets/navbar.php';
-      include 'db/dbHandle.php';
+      
    ?>
 
 

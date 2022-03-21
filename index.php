@@ -1,3 +1,6 @@
+<?php
+include_once 'db/dbHandle.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -22,11 +25,12 @@
         <title>Responsive menu dropdown</title>
     </head>
     <body>
-
-
+    
    <?php
-      include 'assets/navbar.php';
-      include 'db/dbHandle.php';
+      
+
+      include_once 'assets/navbar.php';
+      
    ?>
 
 

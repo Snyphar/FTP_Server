@@ -1,3 +1,4 @@
+
 <!--===== ===================================================
     ============================================================
     =============================================================
@@ -25,8 +26,50 @@
                           <div class="col-md-9">
                             <div class="nav-item">
                                 <ul class="d-flex list">
-                                    <li><a href="movie.php">Movie </a></li>
-                                    <li><a href="series.php">Series </a></li>
+                                <li>
+                                    <a class="btn  dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Movie
+                                    </a>
+
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                        <li><a class="dropdown-item" href="movie.php?catagory=all">All</a></li>
+                                        <?php
+                                           $conn = dbConnect($servername,$username,$password,$dbname);
+                                           $catagories = getCatagories($conn);
+                                           if ($catagories->num_rows > 0) {
+                                             // output data of each row
+                                             while($row = $catagories->fetch_assoc()) { 
+                                                 echo '<li><a class="dropdown-item" href="movie.php?catagory='.$row["catagories"].'">'.$row["catagories"].'</a></li>';
+                                             }
+                                            }
+                                        ?>
+                                        
+        
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a class="btn  dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Series
+                                    </a>
+
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                        <li><a class="dropdown-item" href="series.php?catagory=all">All</a></li>
+                                        <?php
+                                           $conn = dbConnect($servername,$username,$password,$dbname);
+                                           $catagories = getCatagories($conn);
+                                           if ($catagories->num_rows > 0) {
+                                             // output data of each row
+                                             while($row = $catagories->fetch_assoc()) { 
+                                                 echo '<li><a class="dropdown-item" href="series.php?catagory='.$row["catagories"].'">'.$row["catagories"].'</a></li>';
+                                             }
+                                            }
+                                        ?>
+                                        
+        
+                                    </ul>
+                                </li>
+                                    <!--<li><a href="movie.php">Movie </a></li>
+                                    <li><a href="series.php">Series </a></li>-->
                                     <li><a href="software.php">Software </a></li>
                                    
                                 </ul>

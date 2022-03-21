@@ -164,4 +164,10 @@ function getSoftwareFilepath($conn,$stid)
     }
     
 }
+function getCatagories($conn)
+{
+    $sql = 'SELECT * FROM `catagories`';
+    $result = $conn->query($sql);
+    return $result;
+}
 ?>
