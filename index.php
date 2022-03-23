@@ -199,6 +199,139 @@ include_once 'db/dbHandle.php';
 
  <?php
     $conn = dbConnect($servername,$username,$password,$dbname);
+    echo '
+        <section class="Bng">
+        <div class="col">  <p>Popular<span>see all </span></p> </div>
+        <div class="container-fluid">
+          <div class="banner-s2">
+              <div class="banner-slider2">';
+              $catItems = getPopularMoviesItem($conn);
+              if ($catItems->num_rows > 0) {
+                // output data of each row
+                while($row1 = $catItems->fetch_assoc()) {
+                  echo'
+                    <div class="banner-item ">
+                    <div class="overlay ">
+                      <a href="">
+                        <img src="Admin/apps/'.$row1["poster"].'" alt=""> 
+                      </a>
+                    </div> 
+                      <div class="hover">
+                        <a href="media.php?video='.$row1["vid"].'"><i class="fas fa-play-circle"></i></a>
+                      </div>
+                  
+                </div>  
+                  ';
+                }
+              }
+              
+              echo'
+                    <div class="banner-item ">
+                        <div class="overlay ">
+                          <a href="">
+                            <img src="img/slide1.jpg" alt=""> 
+                          </a>
+                        </div> 
+                          <div class="hover">
+                            <a href="media.html"><i class="fas fa-play-circle"></i></a>
+                          </div>
+                      
+                    </div>
+                    <div class="banner-item ">
+                      <div class="overlay">
+                        <a href="" >   <img src="img/slide2.jpg" alt=""> </a>
+                        </div> 
+                          <div class="hover">
+                            <a href="media.html"><i class="fas fa-play-circle"></i></a>
+                          </div>
+                      
+                    </div>
+                    <div class="banner-item bg-3">
+                      <div class="overlay">
+                          <img src="img/slider3.jpg" alt="">  </div> 
+                          <div class="hover">
+                            <a href="media.html"><i class="fas fa-play-circle"></i></a>
+                          </div>
+                      
+                    </div>
+                    <div class="banner-item bg-3">
+                      <div class="overlay">
+                          <img src="img/slider4.jpg" alt="">  </div> 
+                          <div class="hover">
+                            <a href="media.html"><i class="fas fa-play-circle"></i></a>
+                          </div>
+                      
+                    </div>
+                    <div class="banner-item bg-3">
+                      <div class="overlay">
+                          <img src="img/slider5.jpg" alt="">  </div> 
+                          <div class="hover">
+                            <a href="media.html"><i class="fas fa-play-circle"></i></a>
+                          </div>
+                      
+                    </div>
+                    <div class="banner-item bg-3">
+                      <div class="overlay">
+                          <img src="img/slider6.jpg" alt="">  </div> 
+                          <div class="hover">
+                            <a href="media.html"><i class="fas fa-play-circle"></i></a>
+                          </div>
+                      
+                    </div>
+                    <div class="banner-item bg-3">
+                      <div class="overlay">
+                          <img src="img/slide2.jpg" alt="">  </div> 
+                          <div class="hover">
+                            <a href="media.html"><i class="fas fa-play-circle"></i></a>
+                          </div>
+                      
+                    </div>
+                    <div class="banner-item bg-3">
+                      <div class="overlay">
+                          <img src="img/slide1.jpg" alt="">  </div> 
+                          <div class="hover">
+                            <a href="media.html"><i class="fas fa-play-circle"></i></a>
+                          </div>
+                      
+                    </div>
+                    <div class="banner-item bg-3">
+                      <div class="overlay">
+                          <img src="img/slider3.jpg" alt="">  </div> 
+                          <div class="hover">
+                            <a href="media.html"><i class="fas fa-play-circle"></i></a>
+                          </div>
+                      
+                    </div>
+                    <div class="banner-item bg-3">
+                      <div class="overlay">
+                          <img src="img/slider3.jpg" alt="">  </div> 
+                          <div class="hover">
+                            <a href="media.html"><i class="fas fa-play-circle"></i></a>
+                          </div>
+                      
+                    </div>
+                    <div class="banner-item bg-3">
+                      <div class="overlay">
+                          <img src="img/slider3.jpg" alt="">  </div> 
+                          <div class="hover">
+                            <a href="media.html"><i class="fas fa-play-circle"></i></a>
+                          </div>
+                      
+                    </div>
+      
+      
+      
+      
+      
+      
+      
+      
+                  
+              </div>
+      </div>
+        </div>
+      </section>
+        ';
     $catagories = getGenre($conn);
     if ($catagories->num_rows > 0) {
       // output data of each row

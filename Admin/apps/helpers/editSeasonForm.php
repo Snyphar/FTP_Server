@@ -30,7 +30,9 @@
             $res = editSeason($conn,$ssid,$season);
             if($res)
             {
+                
                 $success = 1;
+
             }
             else{
                 $success = -1; 

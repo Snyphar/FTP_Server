@@ -1,4 +1,7 @@
-<?php include 'helpers/dbConnect.php'?>
+<?php 
+    include 'helpers/dbConnect.php';
+    include 'helpers/mediaCatagoryForm.php';
+    ?>
 <!DOCTYPE html>
 <html lang="en">
   
@@ -47,7 +50,7 @@
 </head>
 <body>
     <?php 
-        $software = " active";
+        $catagory = " active";
         include 'includes/side-menu.php';?>
     <?php include 'includes/head-panel.php';?>
 
@@ -79,41 +82,57 @@
         
         <div class="br-pagebody">
             <div class="br-section-wrapper">
+                <div >
+                    <form method="post" action="<?php echo $_SERVER['PHP_SELF'];?>" data-parsley-validate>
+                        <div class="wd-300">
+                            <div class="d-flex mg-b-30">
+                                <div class="form-group mg-b-0 mg-l-20">
+                                    
+                                    <input type="text" name="addCatagory" placeholder="Enter Catagory" class="form-control wd-250"   required>
+                                     
+                                </div><!-- form-group -->
+                                <div class="form-group mg-b-0 mg-l-20">
+                                    
+                                    <button type="submit" class="btn btn-info">ADD CATAGORY</button>
+                                    
+                                </div><!-- form-layout-footer -->
+                                
+                            </div>
+                        </div>
+                        
+
+                    </form>
+                </div>
                 <div class="table-wrapper">
                     <table id="datatable1" class="table display responsive nowrap">
                         <thead>
                             <tr>
-                            <th class="wd-15p">Poster</th>
-                            <th class="wd-15p">Title</th>
-                            <th class="wd-15p">Description</th>
-                            <th class="wd-15p">Size</th>
-                            <th class="wd-10p">Action</th>
+                            <th class="wd-15p">Catagory</th>
+                            
                             
                             </tr>
                         </thead>
                         <tbody>
                             <?php
                                 $conn = dbConnect($servername,$username,$password,$dbname);
-                                $software = getSoftware($conn);
-                                if ($software->num_rows > 0) {
+                                $movies = getMoviesCatagory($conn);
+                                if ($movies->num_rows > 0) {
                                     // output data of each row
-                                    while($row = $software->fetch_assoc()) {
+                                    while($row = $movies->fetch_assoc()) {
                                       echo '
-                                      <tr id="'.$row["stid"].'" >
-                                        <td><img src="'.$row["poster"].'" alt="" border=3 height=150 width=100></img></td>
-                                        <td>'.$row["title"].'</td>
-                                        <td>'.$row["description"].'</td>
-                                        <td>'.$row["size"].'</td>
+                                      <tr id="'.$row["cid"].'" >
+    
+                                        <td>'.$row["catagories"].'</td>
                                         
                                         <td>
                                         <div class="btn-group" role="group" aria-label="Basic example">
-                                            <a href="editsoftware.php?id='.$row["stid"].'">
+                                            <a href="editmediacatagory.php?id='.$row["cid"].'">
                                                 <button type="button" class="btn btn-warning pd-x-25">Edit</button>
                                             </a>
                                             
                                         </div>
                                         </td>
-                                        <td id="'.$row["title"].'">
+                                        <td id="'.$row["catagories"].'">
                                           <button type="button" class="btn btn-danger pd-x-25 remove">Delete</button>
                                         </td>
                                         
@@ -198,10 +217,10 @@
         var id = $(this).parents("tr").attr("id");
         var title = $(this).parents("td").attr("id");
 
-        if(confirm('Are you sure to remove this Software "'+title+'"?'))
+        if(confirm('Are you sure to remove this Movie "'+title+'"?'))
         {
             $.ajax({
-               url: 'helpers/deletesoftware.php',
+               url: 'helpers/deletemoviecatagory.php',
                type: 'GET',
                data: {id: id},
                error: function() {
@@ -209,7 +228,7 @@
                },
                success: function(data) {
                     $("#"+id).remove();
-                    alert("Software removed successfully");  
+                    alert("Catagory removed successfully");  
                }
             });
         }

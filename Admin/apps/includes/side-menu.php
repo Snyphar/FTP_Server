@@ -10,12 +10,7 @@
             <span class="menu-item-label">Dashboard</span>
           </div><!-- menu-item -->
         </a><!-- br-menu-link -->
-        <a href="mailbox.html" class="br-menu-link">
-          <div class="br-menu-item">
-            <i class="menu-item-icon icon ion-ios-email-outline tx-24"></i>
-            <span class="menu-item-label">Mailbox</span>
-          </div><!-- menu-item -->
-        </a><!-- br-menu-link -->
+        
         
         <a href="#" class="br-menu-link  <?php echo  $movies;?>">
           <div class="br-menu-item">
@@ -51,6 +46,18 @@
         <ul class="br-menu-sub nav flex-column">
         <li class="nav-item"><a href="viewsoftware.php" class="nav-link">VIEW SOFWARES</a></li>
           <li class="nav-item"><a href="addsoftware.php" class="nav-link">ADD SOFTWARE</a></li>
+          
+        </ul>
+        <a href="#" class="br-menu-link <?php echo  $catagories;?>">
+          <div class="br-menu-item">
+            <i class="menu-item-icon ion-ios-pie-outline tx-20"></i>
+            <span class="menu-item-label">CATAGORY</span>
+            <i class="menu-item-arrow fa fa-angle-down"></i>
+          </div><!-- menu-item -->
+        </a><!-- br-menu-link -->
+        <ul class="br-menu-sub nav flex-column">
+          <li class="nav-item"><a href="mediacatagory.php" class="nav-link">MEDIA CATAGORY</a></li>
+          <li class="nav-item"><a href="softwarecatagory.php" class="nav-link">SOFTWARE CATAGORY</a></li>
           
         </ul>
         

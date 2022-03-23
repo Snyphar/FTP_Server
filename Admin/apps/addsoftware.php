@@ -48,7 +48,7 @@
 </head>
 <body>
     <?php 
-        $movies = " active";
+        $software = " active";
         include 'includes/side-menu.php';?>
     <?php include 'includes/head-panel.php';?>
 

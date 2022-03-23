@@ -20,14 +20,14 @@
     }
     function curlDownload($url)
     {
-        $downloadURL = urldecode($url);
+        $downloadURL = $url;
         //print  $downloadURL;exit;
-        $type = urldecode($_GET['type']);
+        $type = ;
         $title = urldecode($_GET['title']);
 
         //Finding file extension from the mime type
         $typeArr = explode("/",$type);
-        $extension = $typeArr[1];
+        $extension = ;
 
         $fileName = $title.'.'.$extension;
 

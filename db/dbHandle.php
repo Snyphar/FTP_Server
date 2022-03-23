@@ -61,6 +61,12 @@ function getGenreSeriesItem($conn,$genre,$catagory)
     }
     
 }
+function getPopularMoviesItem($conn)
+{
+    $sql = 'SELECT * FROM  movies WHERE vid IN (SELECT vid FROM views WHERE views_num >= (SELECT AVG(views_num) FROM views))';
+    $result = $conn->query($sql);
+    return $result;
+}
 function getVideoLink($conn,$vid)
 {
     $sql = 'SELECT * FROM  videos WHERE vid = '.$vid;
@@ -166,7 +172,7 @@ function getSoftwareFilepath($conn,$stid)
 }
 function getCatagories($conn)
 {
-    $sql = 'SELECT * FROM `catagories`';
+    $sql = 'SELECT * FROM `media_catagory`';
     $result = $conn->query($sql);
     return $result;
 }

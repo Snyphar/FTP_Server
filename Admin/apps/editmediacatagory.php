@@ -1,4 +1,7 @@
-<?php include 'helpers/editSoftwareForm.php'?>
+<?php 
+    include 'helpers/dbConnect.php';
+    include 'helpers/mediaCatagoryForm.php';
+    ?>
 <!DOCTYPE html>
 <html lang="en">
   
@@ -42,13 +45,12 @@
     <link href="lib/rickshaw/rickshaw.min.css" rel="stylesheet">
     <link href="lib/chartist/chartist.css" rel="stylesheet">
 
-
     <!-- Bracket CSS -->
     <link rel="stylesheet" href="css/bracket.css">
 </head>
 <body>
     <?php 
-        $software = " active";
+        $catagories = " active";
         include 'includes/side-menu.php';?>
     <?php include 'includes/head-panel.php';?>
 
@@ -66,11 +68,11 @@
         
         
         <div class="pd-x-20 pd-sm-x-30 pd-t-20 pd-sm-t-30">
-            <h4 class="tx-gray-800 mg-b-5">ADD A NEW MOVIE</h4>
+            <h4 class="tx-gray-800 mg-b-5">VIEW MOVIES</h4>
             <p class="mg-b-0">To add a movie to the server Please
                 Copy the file to the server & input the 
                 file path and IMDb link.</p>
-                <p class="mg-b-0"><?php echo $error;?></p>
+                <p class="mg-b-0"></p>
             <div class="container">
 
             </div>
@@ -92,7 +94,7 @@
                                 </button>
                                 <div class="d-flex align-items-center justify-content-start">
                                 <i class="icon ion-ios-checkmark alert-icon tx-32 mg-t-5 mg-xs-t-0"></i>
-                                <span><strong>Sucess!</strong> Movie Added!</span>
+                                <span><strong>Sucess!</strong>Catagory Edited!</span>
                                 </div><!-- d-flex -->
                             </div><!-- alert -->
                             </div><!-- col-xl-6 -->
@@ -117,110 +119,45 @@
                         </div>
                         ';
                     }
+                    
                 ?>
-                <div class="form-layout form-layout-1">
-                <h6 class="tx-gray-800 tx-uppercase tx-bold tx-14 mg-b-10">EDIT Software</h6>
-                <p class="mg-b-25 mg-lg-b-50">Info of Software</p>
-                <form method="post" action="<?php echo $_SERVER['PHP_SELF'];?>" enctype="multipart/form-data" data-parsley-validate>
-                    <div class="wd-300">
-                        <div class="d-flex mg-b-30">
-                            <div class="form-group mg-b-0">
-                                <label>Title <span class="tx-danger">*</span></label>
-                                <input type="text" name="softTitle" class="form-control wd-250" value="<?php echo $title;?>" required >
+                <div >
+                    <form method="post" action="<?php echo $_SERVER['PHP_SELF'];?>" data-parsley-validate>
+                        <div class="wd-300">
+                            <div class="d-flex mg-b-30">
+                                <div class="form-group mg-b-0 mg-l-20">
+                                    
+                                    <input type="text" name="editCatagory" placeholder="Enter Catagory" value="<?php echo $catagory; ?>" class="form-control wd-250"   required>
+                                    <input type="hidden" name="cid" placeholder="Enter Catagory" value="<?php echo $cid; ?>" class="form-control wd-250"   required>
+                                </div><!-- form-group -->
+                                <div class="form-group mg-b-0 mg-l-20">
+                                    
+                                    <button type="submit" class="btn btn-info">EDIT CATAGORY</button>
+                                    
+                                </div>
+                                
+                                
+                            </div>
+                            
+                        </div>
+                        
+                        
 
-                            </div><!-- form-group -->
-                            
-                            <div class="form-group mg-b-0 mg-l-20">
-                                <label>File Path <span class="tx-danger">*</span></label>
-                                <input type="text" name="softFileName" class="form-control wd-250" value="<?php echo $file;?>"  required>
-                            </div><!-- form-group -->
-                        </div><!-- d-flex -->   
-                        <div class="d-flex mg-b-30">
-                            
-                        </div><!-- d-flex -->  
-                    </div>
-                    
-                    <div class="row mg-t-20">
-                        
-                        <div class="col-lg-12">
-                            <p class="mg-b-25 mg-lg-b-50">Description</p>
-                            <textarea rows="5" name="softDescription" class="form-control" required><?php echo $description;?></textarea>
-                        </div><!-- col -->
-                        
-                    </div><!-- row --><br>
-                    
+                    </form>
                     <div class="d-flex mg-b-30">
-                            
-                            <div class='col-lg-4'>
-                            <p class="mg-b-25 mg-lg-b-50">Catagories</p>
-                                <select class="form-control select2" name="softCatagories" data-placeholder="Choose Catagories">
-                                    <?php
-                                        $conn = dbConnect($servername,$username,$password,$dbname);
-                                        $catagories = getSoftwareCatagories($conn);
-                                        if ($catagories->num_rows > 0) {
-                                            // output data of each row
-                                            while($row = $catagories->fetch_assoc()) {
-                                            echo '<option value="'.$row["catagory"].'">'.$row["catagory"].'</option>';
-                                            }
-                                        }
-
-                                    ?>
-                                    
-                                </select>
+                        <div class="form-group mg-b-0 mg-l-20">
+                                <a href="mediacatagory.php">
+                                    <button  class="btn btn-info">BACK</button>
+                                </a>
+                                
+                                
                             </div>
                             
-                            <div class='col-lg-4'>
-                            <p class="mg-b-25 mg-lg-b-50">Poster File</p>
-                                <input type="hidden" name="softID" id="softID"  value= "<?php echo $stid; ?>">
-                                <input type="file" name="softPoster" id="movPoster"  onchange="previewFile(this);">
-                            </div>
-
                             
-                            
-                        </div><!-- d-flex -->
-                    <?php
-                        if(!empty($poster))
-                        {
-                            echo '
-                            <div class="card bd-0">
-                                <input type="hidden" name="softPosterPrev"    value="'.$poster.'">
-                                <img class="card-img img-fluid" id="previewImg" src="'.$poster.'" alt="Image">
-                                <div class="card-img-overlay pd-30 d-flex align-items-start flex-column">
-                                    
-                                </div><!-- card-img-overlay -->
-                            </div><br><!-- card -->';
-
-                        }
-                        else{
-                            
-                            echo '
-                            <div class="card bd-0">
-                                <img class="card-img img-fluid" id="previewImg" src="posters/noposter.jpg" alt="Image">
-                                <div class="card-img-overlay pd-30 d-flex align-items-start flex-column">
-                                    
-                                </div><!-- card-img-overlay -->
-                            </div><br><!-- card -->';
-
-                        }
-                    ?>
-                    
-                    <div class="form-layout-footer">
-                        <button type="submit" class="btn btn-info">SAVE</button>
-                        
                     </div><!-- form-layout-footer -->
-
-                    
-                </form>
-                
+        </div>
                 
             </div>
-
-                
-                </div>
-                
-            
-
-            
         </div>
 
 
@@ -239,14 +176,27 @@
     <script src="../lib/jquery.sparkline.bower/jquery.sparkline.min.js"></script>
     <script src="../lib/d3/d3.js"></script>
     <script src="../lib/rickshaw/rickshaw.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
 
     <script src="../js/bracket.js"></script>
     <script src="../js/ResizeSensor.js"></script>
     <script src="../js/dashboard.js"></script>
-    <script src="../js/previewFile.js"></script>
     <script>
+      $(function(){
+        'use strict';
+
+        $('#datatable1').DataTable({
+          responsive: true,
+          language: {
+            searchPlaceholder: 'Search...',
+            sSearch: '',
+            lengthMenu: '_MENU_ items/page',
+          }
+        });
+        // Select2
+        $('.dataTables_length select').select2({ minimumResultsForSearch: Infinity });
+
+      });
       $(function(){
         'use strict'
 
@@ -273,6 +223,26 @@
           }
         }
       });
+      $(".remove").click(function(){
+        var id = $(this).parents("tr").attr("id");
+        var title = $(this).parents("td").attr("id");
+
+        if(confirm('Are you sure to remove this Movie "'+title+'"?'))
+        {
+            $.ajax({
+               url: 'helpers/deletemoviecatagory.php',
+               type: 'GET',
+               data: {id: id},
+               error: function() {
+                  alert('Something is wrong');
+               },
+               success: function(data) {
+                    $("#"+id).remove();
+                    alert("Catagory removed successfully");  
+               }
+            });
+        }
+    });
     </script>
 
 </body>

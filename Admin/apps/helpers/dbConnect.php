@@ -221,7 +221,7 @@ function getSeries($conn)
 }
 function getCatagories($conn)
 {
-    $sql = 'SELECT * FROM  catagories';
+    $sql = 'SELECT * FROM  media_catagory';
     $result = $conn->query($sql);
     return $result;
 }
@@ -463,6 +463,20 @@ function countSeries($conn)
         return -1;
     }
 }
+function countSoftware($conn)
+{
+    $sql = 'SELECT * FROM software';
+    $result = $conn->query($sql);
+    if ($result->num_rows > 0) {
+        $count = mysqli_num_rows($result);
+        return $count;
+
+    }
+    else
+    {
+        return -1;
+    }
+}
 function countViews($conn)
 {
     $sql = 'SELECT SUM(views_num) as sum FROM views';
@@ -477,5 +491,155 @@ function countViews($conn)
     {
         return -1;
     }
+}
+function countMediaCatagory($conn)
+{
+    $sql = 'SELECT * FROM media_catagory';
+    $result = $conn->query($sql);
+    if ($result->num_rows > 0) {
+        $count = mysqli_num_rows($result);
+        return $count;
+
+    }
+    else
+    {
+        return -1;
+    }
+}
+function countSoftwareCatagory($conn)
+{
+    $sql = 'SELECT * FROM software_catagory';
+    $result = $conn->query($sql);
+    if ($result->num_rows > 0) {
+        $count = mysqli_num_rows($result);
+        return $count;
+
+    }
+    else
+    {
+        return -1;
+    }
+}
+function countGenre($conn)
+{
+    $sql = 'SELECT * FROM genre';
+    $result = $conn->query($sql);
+    if ($result->num_rows > 0) {
+        $count = mysqli_num_rows($result);
+        return $count;
+
+    }
+    else
+    {
+        return -1;
+    }
+}
+function countvideos($conn)
+{
+    $sql = 'SELECT * FROM videos';
+    $result = $conn->query($sql);
+    if ($result->num_rows > 0) {
+        $count = mysqli_num_rows($result);
+        return $count;
+
+    }
+    else
+    {
+        return -1;
+    }
+}
+function getMoviesCatagory($conn)
+{
+    $sql = 'SELECT * FROM media_catagory';
+    $result = $conn->query($sql);
+    return $result;
+}
+function deleteMediaCatagory($conn,$cid)
+{
+    $sql = 'DELETE FROM media_catagory WHERE cid = '.$cid;
+    if ($conn->query($sql) === TRUE) {
+        return TRUE;
+    }
+    return FALSE;
+}
+function insertMediaCatagory($conn,$catagory)
+{
+    $sql = 'INSERT INTO media_catagory (`catagories`) VALUES ("'.$catagory.'")';
+    echo $sql;
+    if ($conn->query($sql) === TRUE) { 
+        return TRUE; 
+    } 
+    else {
+        return FALSE;
+        
+    }
+}
+function getSoftwareCatagory($conn)
+{
+    $sql = 'SELECT * FROM software_catagory';
+    $result = $conn->query($sql);
+    return $result;
+}
+function deleteSoftwareCatagory($conn,$id)
+{
+    $sql = 'DELETE FROM software_catagory WHERE id = '.$id;
+    if ($conn->query($sql) === TRUE) {
+        return TRUE;
+    }
+    return FALSE;
+}
+function insertSoftwareCatagory($conn,$catagory)
+{
+    $sql = 'INSERT INTO software_catagory (`catagory`) VALUES ("'.$catagory.'")';
+    
+    if ($conn->query($sql) === TRUE) { 
+        return TRUE; 
+    } 
+    else {
+        return FALSE;
+        
+    }
+}
+function getMoviesCatagoryById($conn,$cid)
+{
+    $sql = 'SELECT * FROM `media_catagory` WHERE cid = '.$cid;
+    $result = $conn->query($sql);
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        
+        return $row["catagories"];
+
+    }
+    
+}
+function getSoftwareCatagoryById($conn,$id)
+{
+    $sql = 'SELECT * FROM `software_catagory` WHERE id = '.$id;
+    $result = $conn->query($sql);
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        
+        return $row["catagory"];
+
+    }
+}
+function editMediaCatagory($conn,$cid,$catagory)
+{
+    $sql = 'UPDATE `media_catagory` SET `catagories` = "'.$catagory.'" WHERE cid = '.$cid;
+    $result = $conn->query($sql);
+    if ($conn->query($sql) === TRUE) {
+        return TRUE;
+    }
+    return FALSE;
+
+}
+function editSoftwareCatagory($conn,$id,$catagory)
+{
+    $sql = 'UPDATE `software_catagory` SET `catagory` = "'.$catagory.'" WHERE id = '.$id;
+    $result = $conn->query($sql);
+    if ($conn->query($sql) === TRUE) {
+        return TRUE;
+    }
+    return FALSE;
 }
 ?>
